@@ -1,0 +1,164 @@
+// ===== DAILY WINS SYSTEM =====
+var dailyWinsData = null;
+
+function loadDailyWins() {
+  if (!currentUser) return;
+  socket.emit('get_daily_wins', { userId: currentUser.id });
+}
+
+socket.on('daily_wins_data', function(data) {
+  if (!data.success) return;
+  dailyWinsData = data;
+  renderDailyWinsBanner();
+});
+
+function renderDailyWinsBanner() {
+  var banner = document.getElementById('daily-wins-banner');
+  if (!banner || !dailyWinsData) {
+    if (banner) banner.style.display = 'none';
+    return;
+  }
+  
+  banner.style.display = 'block';
+  
+  var wins = dailyWinsData.winsToday || 0;
+  var maxWins = dailyWinsData.maxWins || 6;
+  var isLucky = dailyWinsData.isLuckyDay;
+  
+  // Update lucky day badge
+  var luckyBadge = document.getElementById('lucky-day-badge');
+  if (luckyBadge) {
+    luckyBadge.style.display = isLucky ? 'inline-block' : 'none';
+  }
+  
+  // Update lucky style
+  if (isLucky) {
+    banner.classList.add('lucky');
+  } else {
+    banner.classList.remove('lucky');
+  }
+  
+  // Update progress
+  var fill = document.getElementById('dwb-progress-fill');
+  var text = document.getElementById('dwb-progress-text');
+  if (fill) fill.style.width = (wins / maxWins * 100) + '%';
+  if (text) text.textContent = wins + ' / ' + maxWins + ' побед';
+  
+  // Update rewards preview
+  var rewards = dailyWinsData.rewards || [];
+  var rewardsPreview = document.getElementById('dwb-rewards-preview');
+  if (rewardsPreview) {
+    var html = '';
+    rewards.forEach(function(r, idx) {
+      var claimed = dailyWinsData.claimed && dailyWinsData.claimed.includes(idx);
+      html += '<span class="dwb-reward' + (claimed ? ' claimed' : '') + '">' + r.emoji + '</span>';
+    });
+    rewardsPreview.innerHTML = html;
+  }
+}
+
+function showDailyWins() {
+  if (!currentUser) { showToast('Войдите в аккаунт', 'error'); return; }
+  loadDailyWins();
+  
+  var modal = document.getElementById('modal-daily-wins');
+  if (!modal) {
+    // Create modal if not exists
+    var modalHTML = '<div id="modal-daily-wins" class="modal" style="display:none">' +
+      '<div class="modal-content" style="background:linear-gradient(145deg, #1a1a2e, #16213e);color:#fff;max-width:500px;border-radius:20px;padding:24px">' +
+      '<h2 style="text-align:center;margin-bottom:20px">🏆 Победы дня</h2>' +
+      '<div id="dw-content"></div>' +
+      '<button class="btn btn-secondary" style="width:100%;margin-top:16px" onclick="document.getElementById(\'modal-daily-wins\').style.display=\'none\'">Закрыть</button>' +
+      '</div></div>';
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+    modal = document.getElementById('modal-daily-wins');
+  }
+  
+  renderDailyWinsContent();
+  modal.style.display = 'flex';
+}
+
+function renderDailyWinsContent() {
+  var content = document.getElementById('dw-content');
+  if (!content || !dailyWinsData) {
+    content.innerHTML = '<div style="text-align:center">Загрузка...</div>';
+    return;
+  }
+  
+  var wins = dailyWinsData.winsToday || 0;
+  var rewards = dailyWinsData.rewards || [];
+  var isLucky = dailyWinsData.isLuckyDay;
+  var today = new Date().toISOString().split('T')[0];
+  var claimed = dailyWinsData.claimed || [];
+  
+  var html = '';
+  
+  // Lucky day indicator
+  if (isLucky) {
+    html += '<div style="text-align:center;margin-bottom:16px;padding:12px;background:linear-gradient(135deg, #FFD700, #FF9800);border-radius:12px;color:#1a1a2e;font-weight:700">🌟 СЕГОДНЯ СЧАСТЛИВЫЙ ДЕНЬ! ЛУЧШИЕ НАГРАДЫ! 🌟</div>';
+  }
+  
+  // Progress
+  html += '<div style="margin-bottom:20px">';
+  html += '<div style="display:flex;justify-content:space-between;margin-bottom:8px">';
+  html += '<span>Побед сегодня: <strong>' + wins + '</strong></span>';
+  html += '<span style="color:#4CAF50">' + (isLucky ? '🌟 Счастливый день!' : 'Обычный день') + '</span>';
+  html += '</div>';
+  html += '<div style="height:16px;background:rgba(255,255,255,0.1);border-radius:8px;overflow:hidden">';
+  html += '<div style="height:100%;width:' + (wins / 6 * 100) + '%;background:' + (isLucky ? 'linear-gradient(90deg, #9C27B0, #E040FB)' : 'linear-gradient(90deg, #4CAF50, #8BC34A)') + ';border-radius:8px;transition:width 0.5s"></div>';
+  html += '</div>';
+  html += '</div>';
+  
+  // Rewards list
+  html += '<div style="display:flex;flex-direction:column;gap:10px">';
+  rewards.forEach(function(r, idx) {
+    var canClaim = wins >= r.wins;
+    var isClaimed = claimed.includes(idx);
+    var isNext = wins >= r.wins && !isClaimed;
+    
+    html += '<div style="display:flex;align-items:center;gap:12px;padding:12px;background:' + (isClaimed ? 'rgba(76,175,80,0.2)' : isNext ? 'rgba(255,215,0,0.2)' : 'rgba(255,255,255,0.05)') + ';border-radius:12px;border:2px solid ' + (isClaimed ? '#4CAF50' : isNext ? '#FFD700' : 'transparent') + '">';
+    html += '<div style="font-size:32px">' + r.emoji + '</div>';
+    html += '<div style="flex:1">';
+    html += '<div style="font-weight:700">' + r.label + '</div>';
+    html += '<div style="font-size:12px;color:rgba(255,255,255,0.6)">Требуется ' + r.wins + ' побед</div>';
+    html += '</div>';
+    if (isClaimed) {
+      html += '<div style="color:#4CAF50;font-weight:700">✅ Получено</div>';
+    } else if (canClaim) {
+      html += '<button class="btn btn-success" onclick="claimDailyReward(' + idx + ')">Получить!</button>';
+    } else {
+      html += '<div style="color:rgba(255,255,255,0.4)">🔒</div>';
+    }
+    html += '</div>';
+  });
+  html += '</div>';
+  
+  content.innerHTML = html;
+}
+
+function claimDailyReward(rewardIndex) {
+  if (!currentUser) return;
+  socket.emit('claim_daily_reward', { userId: currentUser.id, rewardIndex: rewardIndex });
+}
+
+socket.on('daily_reward_result', function(d) {
+  if (d.success) {
+    currentUser = d.user;
+    localStorage.setItem('pvz_user', JSON.stringify(d.user));
+    updateUserPanel();
+    showToast(d.message, 'success');
+    // Reload daily wins data
+    loadDailyWins();
+  } else {
+    showToast(d.message, 'error');
+  }
+});
+
+// Update daily wins when user logs in
+var originalUpdateUserPanel = updateUserPanel;
+updateUserPanel = function() {
+  originalUpdateUserPanel();
+  if (currentUser) {
+    loadDailyWins();
+  }
+};

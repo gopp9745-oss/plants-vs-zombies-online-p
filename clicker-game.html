@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clicker Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .button {
+            background-color: #1e88e5;
+            color: #ffffff;
+            border: none;
+            padding: 15px 30px;
+            font-size: 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+
+        .button:active {
+            transform: scale(0.95);
+        }
+
+        .score {
+            margin: 20px 0;
+            font-size: 24px;
+        }
+
+        .store {
+            margin-top: 30px;
+            width: 80%;
+            max-width: 400px;
+        }
+
+        .upgrade {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #1e1e1e;
+            border-radius: 5px;
+        }
+
+        .upgrade button {
+            background-color: #43a047;
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .upgrade button:disabled {
+            background-color: #555;
+            cursor: not-allowed;
+        }
+
+        .leaderboard {
+            margin-top: 30px;
+            width: 80%;
+            max-width: 400px;
+        }
+
+        .leaderboard table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .leaderboard th, .leaderboard td {
+            border: 1px solid #333;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .leaderboard th {
+            background-color: #1e88e5;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background-color: #555;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+
+        .progress-bar-inner {
+            height: 100%;
+            background-color: #1e88e5;
+            width: 0;
+            transition: width 0.1s;
+        }
+    </style>
+</head>
+<body>
+    <h1>Clicker Game</h1>
+    <div class="score">Score: <span id="score">0</span></div>
+    <button class="button" id="clickButton">Click!</button>
+
+    <div class="store">
+        <h2>Upgrades</h2>
+        <div class="upgrade">
+            <div>
+                <strong>Autoclicker</strong><br>
+                Level: <span id="autoclickerLevel">0</span> | Cost: <span id="autoclickerCost">10</span>
+            </div>
+            <button id="buyAutoclicker" disabled>Buy</button>
+        </div>
+        <div class="upgrade">
+            <div>
+                <strong>Click Booster</strong><br>
+                Level: <span id="clickBoosterLevel">0</span> | Cost: <span id="clickBoosterCost">20</span>
+            </div>
+            <button id="buyClickBooster" disabled>Buy</button>
+        </div>
+    </div>
+
+    <div class="leaderboard">
+        <h2>Leaderboard</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Name</th>
+                    <th>Score</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody id="leaderboardBody">
+                <!-- Leaderboard entries will be dynamically added here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        let score = 0;
+        let clickPower = 1;
+        let autoclickerLevel = 0;
+        let clickBoosterLevel = 0;
+        let autoclickerCost = 10;
+        let clickBoosterCost = 20;
+        let autoclickerInterval = null;
+
+        const scoreDisplay = document.getElementById('score');
+        const clickButton = document.getElementById('clickButton');
+        const buyAutoclicker = document.getElementById('buyAutoclicker');
+        const buyClickBooster = document.getElementById('buyClickBooster');
+        const autoclickerLevelDisplay = document.getElementById('autoclickerLevel');
+        const clickBoosterLevelDisplay = document.getElementById('clickBoosterLevel');
+        const autoclickerCostDisplay = document.getElementById('autoclickerCost');
+        const clickBoosterCostDisplay = document.getElementById('clickBoosterCost');
+        const leaderboardBody = document.getElementById('leaderboardBody');
+
+        clickButton.addEventListener('click', () => {
+            score += clickPower;
+            updateScore();
+        });
+
+        buyAutoclicker.addEventListener('click', () => {
+            if (score >= autoclickerCost) {
+                score -= autoclickerCost;
+                autoclickerLevel++;
+                autoclickerCost = Math.floor(autoclickerCost * 1.5);
+                startAutoclicker();
+                updateUpgrades();
+                updateScore();
+            }
+        });
+
+        buyClickBooster.addEventListener('click', () => {
+            if (score >= clickBoosterCost) {
+                score -= clickBoosterCost;
+                clickBoosterLevel++;
+                clickPower += 1;
+                clickBoosterCost = Math.floor(clickBoosterCost * 1.5);
+                updateUpgrades();
+                updateScore();
+            }
+        });
+
+        function startAutoclicker() {
+            if (autoclickerInterval) clearInterval(autoclickerInterval);
+            autoclickerInterval = setInterval(() => {
+                score += autoclickerLevel;
+                updateScore();
+            }, 1000);
+        }
+
+        function updateScore() {
+            scoreDisplay.textContent = score;
+            buyAutoclicker.disabled = score < autoclickerCost;
+            buyClickBooster.disabled = score < clickBoosterCost;
+        }
+
+        function updateUpgrades() {
+            autoclickerLevelDisplay.textContent = autoclickerLevel;
+            clickBoosterLevelDisplay.textContent = clickBoosterLevel;
+            autoclickerCostDisplay.textContent = autoclickerCost;
+            clickBoosterCostDisplay.textContent = clickBoosterCost;
+        }
+
+        function saveGame() {
+            const gameData = {
+                score,
+                clickPower,
+                autoclickerLevel,
+                clickBoosterLevel,
+                autoclickerCost,
+                clickBoosterCost
+            };
+            localStorage.setItem('clickerGameSave', JSON.stringify(gameData));
+        }
+
+        function loadGame() {
+            const savedData = JSON.parse(localStorage.getItem('clickerGameSave'));
+            if (savedData) {
+                score = savedData.score;
+                clickPower = savedData.clickPower;
+                autoclickerLevel = savedData.autoclickerLevel;
+                clickBoosterLevel = savedData.clickBoosterLevel;
+                autoclickerCost = savedData.autoclickerCost;
+                clickBoosterCost = savedData.clickBoosterCost;
+                updateScore();
+                updateUpgrades();
+                startAutoclicker();
+            }
+        }
+
+        setInterval(saveGame, 10000);
+        loadGame();
+    </script>
+</body>
+</html>

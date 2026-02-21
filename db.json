@@ -1,0 +1,343 @@
+{
+  "users": [
+    {
+      "id": "11e267dd-e913-4452-b381-06be83c252af",
+      "username": "goplop",
+      "password": "$2a$10$0pBbTzCI036DXv6uckUnYeBGUd2chf2FbQBY6EuYv4UlPMkYaCcKe",
+      "coins": 229,
+      "wins": 2,
+      "losses": 1,
+      "isAdmin": true,
+      "inventory": [
+        4,
+        44,
+        2,
+        54,
+        53
+      ],
+      "createdAt": "2026-02-18T06:39:01.333Z",
+      "crystals": 0,
+      "plantLevels": {
+        "sunflower": 3
+      },
+      "winsToday": 1,
+      "lastWinDate": "2026-02-19",
+      "cards": [],
+      "dailyRewardsClaimed": {
+        "2026-02-19": [
+          0
+        ]
+      }
+    },
+    {
+      "id": "2f53a09d-56a5-43db-b732-64a94a21a201",
+      "username": "ghopo",
+      "password": "$2a$10$F/Ahi02EJnG0C3XsTEpE2eZOBZoEgX2tOGD81oB76XupJNYMsaiJa",
+      "coins": 150,
+      "wins": 1,
+      "losses": 1,
+      "isAdmin": true,
+      "inventory": [
+        "plant_box"
+      ],
+      "createdAt": "2026-02-18T06:40:18.048Z",
+      "crystals": 0,
+      "winsToday": 0,
+      "lastWinDate": "2026-02-19",
+      "cards": [],
+      "dailyRewardsClaimed": {}
+    },
+    {
+      "id": "b1e82e4e-f3b7-4330-b14c-b38ce4b7f006",
+      "username": "hipohopo",
+      "password": "$2a$10$ShG7NzD6CZ4yElxPqv4z8.ARrxIKpzDF/lDcVsBt83hrEHGqHE8cu",
+      "coins": 80,
+      "wins": 2,
+      "losses": 3,
+      "isAdmin": true,
+      "inventory": [
+        2,
+        4,
+        1
+      ],
+      "createdAt": "2026-02-18T07:16:04.172Z",
+      "crystals": 0,
+      "plantLevels": {
+        "sunflower": 2
+      },
+      "winsToday": 0,
+      "lastWinDate": "2026-02-19",
+      "cards": [],
+      "dailyRewardsClaimed": {}
+    },
+    {
+      "id": "d525b465-9666-43b0-9e7c-7629c4d94c01",
+      "username": "Говноед",
+      "password": "$2a$10$nPaYlHo6hmT/WuGAjK6w8uQZbwqdlSuWzspLDvEwdoE0Wzba25a8K",
+      "coins": 100,
+      "wins": 2,
+      "losses": 4,
+      "isAdmin": false,
+      "inventory": [
+        1,
+        "plant_box"
+      ],
+      "createdAt": "2026-02-18T07:58:14.765Z",
+      "friends": [
+        "6c9d3b4c-3e21-4e36-8a87-bc0cf9258b5d"
+      ],
+      "crystals": 0,
+      "winsToday": 0,
+      "lastWinDate": "2026-02-19",
+      "cards": [],
+      "dailyRewardsClaimed": {}
+    },
+    {
+      "id": "adfd704f-a992-464f-9ab8-18cdc8df611e",
+      "username": "goplop123",
+      "password": "$2a$10$8oAxYKZJr62jtCx.mUfK3eqgHbs.mfCnSbv29Pc3STqCy23WHQHEW",
+      "coins": 100,
+      "wins": 1,
+      "losses": 4,
+      "isAdmin": false,
+      "inventory": [
+        1,
+        4,
+        3,
+        5
+      ],
+      "createdAt": "2026-02-18T08:55:47.853Z",
+      "avatar": "🥷",
+      "bio": "",
+      "crystals": 0,
+      "friends": [
+        "8aca10ce-15ee-4784-a91c-4be2bc98c1ca"
+      ],
+      "winsToday": 0,
+      "lastWinDate": "2026-02-19",
+      "cards": [],
+      "dailyRewardsClaimed": {}
+    },
+    {
+      "id": "13a6c68e-3417-405b-a8dc-cff4f9421e45",
+      "username": "Govnoed",
+      "password": "$2a$10$2e37VcG/0Wagry7Mof3JR.B9ISvQjo6HLztauRH1IflKN9ksuV9GC",
+      "coins": 100,
+      "wins": 0,
+      "losses": 0,
+      "isAdmin": false,
+      "inventory": [
+        "plant_box"
+      ],
+      "createdAt": "2026-02-18T11:57:00.170Z",
+      "avatar": "🐉",
+      "bio": "",
+      "crystals": 0,
+      "winsToday": 0,
+      "lastWinDate": "2026-02-19",
+      "cards": [],
+      "dailyRewardsClaimed": {}
+    },
+    {
+      "id": "6c9d3b4c-3e21-4e36-8a87-bc0cf9258b5d",
+      "username": "Семяна",
+      "password": "$2a$10$0mcuIxoRhZrQNB95JoqJAOOIfYSnOmlRdKopmyJi4ZhLZn/h3JdDa",
+      "coins": 260,
+      "wins": 11,
+      "losses": 1,
+      "isAdmin": false,
+      "inventory": [
+        1,
+        21,
+        3,
+        2,
+        4,
+        5,
+        "coins_small",
+        44
+      ],
+      "createdAt": "2026-02-18T12:00:53.893Z",
+      "friendRequests": [],
+      "friends": [
+        "d525b465-9666-43b0-9e7c-7629c4d94c01"
+      ],
+      "crystals": 0,
+      "winsToday": 2,
+      "lastWinDate": "2026-02-19",
+      "cards": [],
+      "dailyRewardsClaimed": {
+        "2026-02-19": [
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "id": "8aca10ce-15ee-4784-a91c-4be2bc98c1ca",
+      "username": "pencilcase",
+      "password": "$2a$10$vnyvP0hPriD7oez6nukHzeRY/5Dvpy85PuAHt3QtUy..Y/5dBlea2",
+      "coins": 100,
+      "wins": 0,
+      "losses": 0,
+      "isAdmin": false,
+      "inventory": [
+        1,
+        2
+      ],
+      "createdAt": "2026-02-19T10:30:48.163Z",
+      "crystals": 0,
+      "friendRequests": [],
+      "friends": [
+        "adfd704f-a992-464f-9ab8-18cdc8df611e"
+      ],
+      "winsToday": 0,
+      "lastWinDate": "2026-02-19",
+      "cards": [],
+      "dailyRewardsClaimed": {}
+    }
+  ],
+  "promoCodes": [
+    {
+      "id": "8a6033c1-eade-403b-9582-6c7665ee7ef9",
+      "code": "PROMO2026",
+      "reward": 500,
+      "maxUses": null,
+      "usedCount": 1,
+      "usedBy": [
+        "11e267dd-e913-4452-b381-06be83c252af"
+      ],
+      "active": true,
+      "createdAt": "2026-02-19T11:57:01.576Z"
+    }
+  ],
+  "shopItems": [
+    {
+      "id": 1,
+      "name": "Горошина-стрелок",
+      "description": "Базовое растение",
+      "price": 100,
+      "type": "plant",
+      "emoji": "🌱"
+    },
+    {
+      "id": 2,
+      "name": "Подсолнух",
+      "description": "Генерирует солнце быстрее",
+      "price": 150,
+      "type": "plant",
+      "emoji": "🌻"
+    },
+    {
+      "id": 3,
+      "name": "Вишнёвая бомба",
+      "description": "Мощный взрыв",
+      "price": 200,
+      "type": "plant",
+      "emoji": "🍒"
+    },
+    {
+      "id": 4,
+      "name": "Обычный зомби",
+      "description": "Базовый зомби",
+      "price": 80,
+      "type": "zombie",
+      "emoji": "🧟"
+    },
+    {
+      "id": 5,
+      "name": "Зомби-конус",
+      "description": "Зомби с защитой",
+      "price": 120,
+      "type": "zombie",
+      "emoji": "🧟‍♂️"
+    },
+    {
+      "id": 6,
+      "name": "Зомби-ведро",
+      "description": "Очень прочный зомби",
+      "price": 180,
+      "type": "zombie",
+      "emoji": "🪣"
+    },
+    {
+      "id": 7,
+      "name": "Скин \"Ночной\"",
+      "description": "Тёмный скин для игры",
+      "price": 300,
+      "type": "skin",
+      "emoji": "🌙"
+    },
+    {
+      "id": 8,
+      "name": "Скин \"Золотой\"",
+      "description": "Золотой скин",
+      "price": 500,
+      "type": "skin",
+      "emoji": "⭐"
+    }
+  ],
+  "customShopItems": [],
+  "events": [
+    {
+      "id": "release_event_2024",
+      "name": "🚀 Релиз игры",
+      "description": "Отмечаем запуск! Любая PvP победа засчитывается!",
+      "targetWins": 100,
+      "reward": 500,
+      "currentWins": 6,
+      "active": true,
+      "completed": false,
+      "participants": [],
+      "createdAt": "2026-02-18T14:39:37.924Z",
+      "endsAt": 1772031146148
+    }
+  ],
+  "shopGifts": [
+    {
+      "id": "f215cae0-1c47-4133-80ab-c7b2fd7c1334",
+      "title": "в честь релиза всем",
+      "description": "",
+      "rewards": [
+        {
+          "type": "box",
+          "boxType": "plant_box"
+        }
+      ],
+      "active": true,
+      "expiresAt": 1771517062008,
+      "claimedBy": [
+        "b1e82e4e-f3b7-4330-b14c-b38ce4b7f006",
+        "6c9d3b4c-3e21-4e36-8a87-bc0cf9258b5d",
+        "adfd704f-a992-464f-9ab8-18cdc8df611e",
+        "8aca10ce-15ee-4784-a91c-4be2bc98c1ca",
+        "11e267dd-e913-4452-b381-06be83c252af"
+      ],
+      "claimedCount": 5,
+      "createdAt": "2026-02-19T06:04:22.009Z",
+      "createdBy": "hipohopo"
+    },
+    {
+      "id": "a76d2479-b1c5-43bc-82ef-6a84c82744ab",
+      "title": "из за тех перерыва",
+      "description": "",
+      "rewards": [
+        {
+          "type": "box",
+          "boxType": "plant_box"
+        }
+      ],
+      "active": true,
+      "expiresAt": 1771517821798,
+      "claimedBy": [
+        "b1e82e4e-f3b7-4330-b14c-b38ce4b7f006",
+        "6c9d3b4c-3e21-4e36-8a87-bc0cf9258b5d",
+        "adfd704f-a992-464f-9ab8-18cdc8df611e",
+        "8aca10ce-15ee-4784-a91c-4be2bc98c1ca",
+        "11e267dd-e913-4452-b381-06be83c252af"
+      ],
+      "claimedCount": 5,
+      "createdAt": "2026-02-19T06:17:01.798Z",
+      "createdBy": "hipohopo"
+    }
+  ]
+}
